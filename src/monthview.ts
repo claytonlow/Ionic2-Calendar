@@ -509,6 +509,25 @@ export class MonthViewComponent implements ICalendarComponent, OnInit, OnDestroy
             }
         }
 
+        if (date.events && date.events.length > 0) {
+            let completed = [];
+            date.events.forEach((e: any) => {
+                if (e.userHasCompletedWorkout) {
+                    completed.push(true);
+                }
+            })
+
+            if (completed.length === date.events.length) {
+              return 'monthview-completed'
+            }
+
+            if (date.secondary) {
+                className = 'monthview-secondary-with-event';
+            } else {
+                className = 'monthview-primary-with-event';
+            }
+        }
+
         if (date.selected) {
             if (className) {
                 className += ' ';
